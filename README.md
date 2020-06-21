@@ -10,7 +10,7 @@ To run, simply do these steps:
 
 This repo is a submission for Bangk!t final group assignment on CNN Tensorflow model, presented to you by:
 * Ratih Aflita, https://github.com/aflita
-* Fahmi Jabber
+* Fahmi Jabbar, https://github.com/fahmij8
 * Adinda Riztia Putri, https://github.com/adindariztia
 
 For source code of model behind this project kindly visit: https://github.com/aflita/image-captioning-flickr8k 
