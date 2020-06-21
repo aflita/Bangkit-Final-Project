@@ -14,7 +14,7 @@ let isModelLoaded = false;
 let model;
 let mobileNet;
 
-const maxLen = 40; // 40
+const maxLen = 34; // 40
 
 function preprocess(imgElement) {
     $('#spinner-caption span').show();
@@ -24,7 +24,7 @@ function preprocess(imgElement) {
     return tf.tidy(() => {
         let tensor = tf.fromPixels(imgElement).toFloat();
         const resized = tf.image.resizeBilinear(tensor,[224,224]);
-        const offset = 125.5;
+        const offset = 127.5;
         const normalized = resized.div(offset).sub(tf.scalar(1.0));
         const batched = normalized.expandDims(0);
         return batched;
@@ -49,7 +49,7 @@ function caption(img) {
             let parCaps = [];
             for (let j = 0; j < startWord.length; ++j) {
                 //console.log(typeof(parCaps));
-                parCaps.push(word2idx[startWord[j]]);
+                parCaps.push(word2index[startWord[j]]);
             }
             parCaps = tf.tensor1d(parCaps)
                         .pad([[0, maxLen - startWord.length]])
@@ -61,7 +61,7 @@ function caption(img) {
             //console.log(preds.shape);
             
             idx = preds.argMax().dataSync();
-            wordPred = idx2word[idx];
+            wordPred = index2word[idx];
             
             startWord.push(wordPred);            
             if(wordPred=='<end>'||startWord.length>maxLen)
@@ -90,7 +90,7 @@ async function start() {
     $('#image').hide();
     
     //mobileNet = loadMobileNet();
-    const mobilenet = await tf.loadModel('https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json');
+    const mobilenet = await tf.loadModel('img_model_mobilenet/model.json');
     const layer = mobilenet.getLayer('conv_preds');
     console.log("mobileNet loaded");
     mobileNet =  tf.model({
@@ -98,7 +98,7 @@ async function start() {
         'outputs': layer.output
     });
 
-    model = await tf.loadModel('model/model.json');
+    model = await tf.loadModel('lang_model_lstmbidi/model.json');
     console.log("Inside start()");
     $('#spinner').hide();
     modelLoaded();
