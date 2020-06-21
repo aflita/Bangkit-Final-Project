@@ -98,7 +98,11 @@
                 <p>contact us : <a href="https://events.withgoogle.com/bangkit/" target="_blank">Bangkit academy</a></p>
             </div>
         </div>
+         <!-- Adds the WASM backend to the global backend registry -->
+         
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm/dist/tf-backend-wasm.js"></script>
         <!-- <script src="./model/word2idx.js"></script>
         <script src="./model/idx2word.js"></script> -->
         <script src="lang_model_lstmbidi/word2index.js"></script>
@@ -111,5 +115,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <!-- link to js file -->
         <script src="./js/caption.js"></script>
+
+       
+        
+        <!-- <script>
+        tf.setBackend('wasm').then(() => start());
+        </script> -->
     </body>
 </html>

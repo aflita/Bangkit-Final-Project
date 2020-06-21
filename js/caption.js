@@ -92,15 +92,15 @@ async function start() {
     $('#image').hide();
     
     //mobileNet = loadMobileNet();
-    const mobilenet = await tf.loadModel('img_model_mobilenet/model.json');
-    const layer = mobilenet.getLayer('conv_preds');
+    const mobilenet = await tf.loadModel('img_model/model.json');
+    const layer = mobilenet.getLayer('global_average_pooling2d');
     console.log("mobileNet loaded");
     mobileNet =  tf.model({
         'inputs': mobilenet.inputs,
         'outputs': layer.output
     });
 
-    model = await tf.loadModel('lang_model_lstmbidi/model.json');
+    model = await tf.loadModel('lang_model/model.json');
     console.log("Inside start()");
     $('#spinner').hide();
     modelLoaded();
@@ -156,4 +156,4 @@ button.addEventListener("click",function() {
     
 });
 
-start();
+// start();
