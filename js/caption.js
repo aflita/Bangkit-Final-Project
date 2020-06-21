@@ -75,6 +75,8 @@ function caption(img) {
         cap = startWord.join(' ');
         console.log("caption: ", cap);
         capField.innerHTML = cap;
+		let msg = new SpeechSynthesisUtterance(cap);
+		window.speechSynthesis.speak(msg);
        
         //return startWord.join(' ');
         //return asyncCaption(img);
