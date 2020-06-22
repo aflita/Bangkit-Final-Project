@@ -77,7 +77,7 @@ function caption(img) {
         capField.innerHTML = cap;
         $('#btnPlay').show();
 		captionSpeech = cap
-       
+        playSentence(captionSpeech);
         //return startWord.join(' ');
         //return asyncCaption(img);
 
@@ -88,10 +88,7 @@ function caption(img) {
 }
 
 
-async function start() {
-    $('#image').hide();
-    $('#btnPlay').hide();
-    
+async function start() {    
     //mobileNet = loadMobileNet();
     const mobilenet = await tf.loadModel('img_model_mobilenet/model.json');
     const layer = mobilenet.getLayer('conv_preds');
@@ -158,13 +155,29 @@ button.addEventListener("click",function() {
 });
 
 function playSentence(text) {    
-      var msg = new SpeechSynthesisUtterance();    
-      msg.text = text;
-      window.speechSynthesis.speak(msg);
+      let msg = new SpeechSynthesisUtterance(text);
+      msg.lang = 'en-US';
+      speechSynthesis.speak(msg);
 }
 
 $("#btnPlay").click(function() {
       playSentence(captionSpeech);
 });
 
-start();
+let checkGPU = () => {
+    $('#image').hide();
+    $('#btnPlay').hide();
+    let canvas = document.getElementById("webgl-canvas")
+    gl = canvas.getContext("experimental-webgl");
+    let maxTextureSize = gl.getParameter( gl.MAX_TEXTURE_SIZE );
+
+    if (maxTextureSize > 7999){
+        start();
+        console.log("Device is good");
+    } else {
+        $('#alerting2').toast('show');
+        console.log("Device unable to do prediction")
+    }
+}
+
+checkGPU()

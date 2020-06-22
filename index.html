@@ -38,6 +38,7 @@
                             </button>
                             <input type="file" id="imageLoader" name="imageLoader" class="hide_file">
                         </div>
+                        <canvas id="webgl-canvas" width="1" height="1"></canvas>
                         <img class="img-fluid p-3 block shadow" src="" id="image" width="400">
                         <div class="p-2">
                             <button class="btn block mt-3" type="button" id="btn" style="background-color: #9879e7;border-color: #9879e7">Generate Caption                     
@@ -48,12 +49,17 @@
                         <div id="caption-div">
                             <h4 class="text-dark">Caption: </h4>
                             <div id="caption"></div>
-                            <button class="btn block mt-2" type="button" id="btnPlay" style="background-color: #9879e7;border-color: #9879e7">Hear it!                    
+                            <button class="btn block mt-2" type="button" id="btnPlay" style="background-color: #9879e7;border-color: #9879e7">Hear it again!                    
                             </button>
                             <div id="spinner-caption" class="d-inline-block">
                                 <span class="spinner-grow spinner-border-sm text-danger" role="status" aria-hidden="true"></span>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="toast alert-danger mx-auto mt-2 mb-5" role="alert" aria-live="assertive" aria-atomic="true" id="alerting2" data-autohide="false">
+                    <div class="toast-body">
+                        Your device doesn't met our minimum hardware requirements. Please move to another bigger/high-end devices.
                     </div>
                 </div>
                 <div class="toast alert-danger mx-auto mt-2 mb-5" role="alert" aria-live="assertive" aria-atomic="true" id="alerting" data-autohide="false">
