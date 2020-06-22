@@ -75,8 +75,8 @@ function caption(img) {
         cap = startWord.join(' ');
         console.log("caption: ", cap);
         capField.innerHTML = cap;
-		let msg = new SpeechSynthesisUtterance(cap);
-		window.speechSynthesis.speak(msg);
+        $('#btnPlay').show();
+		captionSpeech = cap
        
         //return startWord.join(' ');
         //return asyncCaption(img);
@@ -90,6 +90,7 @@ function caption(img) {
 
 async function start() {
     $('#image').hide();
+    $('#btnPlay').hide();
     
     //mobileNet = loadMobileNet();
     const mobilenet = await tf.loadModel('img_model_mobilenet/model.json');
@@ -154,6 +155,16 @@ button.addEventListener("click",function() {
     },3000);
    
     
+});
+
+function playSentence(text) {    
+      var msg = new SpeechSynthesisUtterance();    
+      msg.text = text;
+      window.speechSynthesis.speak(msg);
+}
+
+$("#btnPlay").click(function() {
+      playSentence(captionSpeech);
 });
 
 start();
